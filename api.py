@@ -15,15 +15,11 @@ CORS(app)
 def home():
     return render_template('index.html')
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
 @app.route('/login')
 def login():
     return render_template('login.html')
 
-@app.route('/blog')
+@app.route('/generalUser')
 def blog():
     return render_template('blog.html')
 
@@ -31,11 +27,66 @@ def blog():
 def userResult():
     return render_template('result.html')
 
-@app.route('/showSignUp')
-def showSignUP():
-    return render_template('login.html')
 
-@app.route('/result')
+@app.route('/signup', methods = ['POST', 'GET'])
+def signup():
+    print("signup")
+
+    name = request.form.get("username")
+    email = request.form.get("email")
+    password = request.form.get("password")
+    data = request.data
+
+    print(name)
+    print(email)
+    print(password)
+
+    if email == "sarthak@slack.com":
+        return flask.redirect("http://127.0.0.1:5000/devResult")
+
+        
+    return render_template('blog.html')
+    #     return redirect(url_for('))
+    
+
+    # if _name and _email and _password:
+    #     return redirect(url_for('home'))
+
+
+@app.route('/signin', methods = ['POST', 'GET'])
+def signin():
+    print("signin")
+
+    email = request.form.get("email")
+    password = request.form.get("password")
+    
+    print(email)
+    print(password)
+
+    if email == "sarthak@slack.com":
+        return flask.redirect("http://127.0.0.1:5000/devResult")
+
+        
+    return render_template('blog.html')
+    #     return redirect(url_for('))
+    
+
+    # if _name and _email and _password:
+    #     return redirect(url_for('home'))
+
+
+
+
+@app.route('/loggedIn', methods = ['POST', 'GET'])
+def loggedIn():
+    _name = request.form.get("inputName")
+    if(_name):
+        if(_name == "sarthak@slack.com"):
+            return render_template('resultDeveloper.html')
+    return render_template('blog.html')
+
+
+@app.route('/devResult')
 def res():
     # result,continuation_token= reviews('com.Slack',lang='en',country='us',sort=Sort.MOST_RELEVANT, count=1000)
     df = pd.read_csv ('roxy\\app_reviews_slack.csv')
@@ -174,33 +225,6 @@ def res():
 # def result():
 #     return render_template('resultDeveloper.html')
 
-
-
-@app.route('/signup', methods = ['POST', 'GET'])
-def signup():
-    print("HELLOOO")
-
-    _name = request.form.get("username")
-    _email = request.form.get("email")
-    _password = request.form.get("password")
-    data = request.data
-    if _email == "sarthak@slack.com":
-        return flask.redirect("http://127.0.0.1:5000/result")
-    return render_template('blog.html')
-    #     return redirect(url_for('))
-    
-
-    # if _name and _email and _password:
-    #     return redirect(url_for('home'))
-
-
-@app.route('/loggedIn', methods = ['POST', 'GET'])
-def loggedIn():
-    _name = request.form.get("inputName")
-    if(_name):
-        if(_name == "sarthak@slack.com"):
-            return render_template('resultDeveloper.html')
-    return render_template('blog.html')
 
 
 
